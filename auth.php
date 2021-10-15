@@ -16,26 +16,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = [];
     $email = trim($_POST['email']);
     $pass = $_POST['pass'];
-    $user = create_user($con, $email);
+    $user = create_user($con, $email) ?? null;
     $hash = $user['pass'];
     foreach ($required as $field) {
         if (empty($_POST[$field])) {
             $errors[$field] = 'Это поле надо заполнить';
-        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors['email'] = 'E-mail введён некорректно';
-        } elseif (!check_email($con, $email)) {
-            $errors['email'] = 'Такой пользователь не найден';
-        } elseif (!password_verify($pass, $hash)) {
-            $errors['pass'] = 'Неверный пароль';
+        } else {
+            if (!password_verify($pass, $hash)) {
+                $errors['pass'] = 'Неверный пароль';
+            }
+            if (!check_email($con, $email)) {
+                $errors['email'] = 'Такой пользователь не найден';
+            }
         }
     }
-    if (!count($errors) || $user) {
+    if (empty($errors) && $user) {
         $_SESSION['user'] = $user;
+        header("Location: /index.php");
+        exit();
+    } else {
+        $page_content = include_template('auth.php', ['errors' => $errors ?? false]);
+    }
+} else {
+    $page_content = include_template('auth.php');
+    if (isset($_SESSION['user'])) {
         header("Location: index.php");
         exit();
     }
 }
-$page_content = include_template('auth.php', ['errors' => $errors ?? false]);
 $layout_content = include_template(
     'layout.php',
     [

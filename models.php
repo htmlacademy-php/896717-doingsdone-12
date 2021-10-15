@@ -163,7 +163,7 @@ function create_user(mysqli $con, string $email)
     $stmt = db_get_prepare_stmt($con, $sql, [$email]);
     mysqli_stmt_execute($stmt);
     $res = mysqli_stmt_get_result($stmt);
-    return $res ? mysqli_fetch_array($res, MYSQLI_ASSOC) : db_error('Не удалось сформировать массив данных пользователя');
+    return $res ? mysqli_fetch_array($res, MYSQLI_ASSOC) : null;
 }
 
 /**
