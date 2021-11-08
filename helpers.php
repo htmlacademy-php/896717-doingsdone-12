@@ -157,7 +157,7 @@ function task_сount($tasks, $category_id)
 {
     $count = 0;
     foreach ($tasks as $task) {
-        if ($task['cat_id'] == $category_id && $task['done'] != 1) {
+        if (intval($task['cat_id']) === intval($category_id) && intval($task['done']) !== 1) {
             $count++;
         }
     }

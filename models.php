@@ -157,7 +157,7 @@ function get_tasks_by_category(mysqli $con, int $user_id, int $cat_id)
 *
 * @return array массив с данными пользователя или null
 */
-function create_user(mysqli $con, string $email)
+function get_user(mysqli $con, string $email)
 {
     $sql = 'SELECT id, name, email, pass FROM users WHERE email = ?';
     $stmt = db_get_prepare_stmt($con, $sql, [$email]);
