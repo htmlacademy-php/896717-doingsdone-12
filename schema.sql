@@ -21,7 +21,7 @@ CREATE TABLE category (
 CREATE TABLE task (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255),
-    date TIMESTAMP,
+    date DATE,
     cat_id INT NOT NULL,
     file VARCHAR(255),
     done SMALLINT NOT NULL DEFAULT '0',

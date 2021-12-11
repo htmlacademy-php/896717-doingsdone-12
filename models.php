@@ -209,9 +209,11 @@ function get_tasks(mysqli $con, int $user_id, string $tasks_switch = null, strin
         }
     }
     if ($show_complete_tasks) {
-        $sql = "SELECT id, name, date, cat_id, file, done, user_id FROM task WHERE user_id = " . $user_id . $tasks_switch;
+        $sql = "SELECT id, name, date, cat_id, file, done, user_id
+        FROM task WHERE user_id = " . $user_id . $tasks_switch;
     } else {
-        $sql = "SELECT id, name, date, cat_id, file, done, user_id FROM task WHERE done = 0 AND user_id = " . $user_id . $tasks_switch;
+        $sql = "SELECT id, name, date, cat_id, file, done, user_id
+        FROM task WHERE done = 0 AND user_id = " . $user_id . $tasks_switch;
     }
     $stmt = mysqli_query($con, $sql);
     $res = mysqli_fetch_all($stmt, MYSQLI_ASSOC);
@@ -255,7 +257,9 @@ function task_checkbox(mysqli $con, int $task_id)
  */
 function get_users_tasks_today(mysqli $con)
 {
-    $sql = "SELECT users.id, users.name as user_name, users.email, task.name as task_name, task.date FROM users JOIN task ON task.user_id = users.id WHERE task.done = 0 AND task.date = CURRENT_DATE()";
+    $sql = "SELECT users.id, users.name as user_name, users.email, task.name as task_name, task.date
+    FROM users JOIN task ON task.user_id = users.id
+    WHERE task.done = 0 AND task.date = CURRENT_DATE()";
     $stmt = db_get_prepare_stmt($con, $sql);
     mysqli_stmt_execute($stmt);
     $res = mysqli_stmt_get_result($stmt);

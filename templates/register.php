@@ -10,21 +10,24 @@
                 <?php $error_classname = !empty($errors['email']) ? "form__input--error" : ""; ?>
                 <?php $error_text = !empty($errors['email']) ? $errors['email'] : ""; ?>
                 <label class="form__label" for="email">E-mail <sup>*</sup></label>
-                <input class="form__input <?= $error_classname; ?>" type="text" name="email" id="email" value="<?= getPostVal('email'); ?>" placeholder="Введите e-mail">
+                <input class="form__input <?= $error_classname; ?>" type="text" name="email" id="email"
+                value="<?= getPostVal('email'); ?>" placeholder="Введите e-mail">
                 <p class="form__message"><?= $error_text; ?></p>
             </div>
             <div class="form__row">
                 <?php $error_classname = !empty($errors['password']) ? "form__input--error" : ""; ?>
                 <?php $error_text = !empty($errors['password']) ? $errors['password'] : ""; ?>
                 <label class="form__label" for="password">Пароль <sup>*</sup></label>
-                <input class="form__input <?= $error_classname; ?>" type="password" name="password" id="password" value="" placeholder="Введите пароль">
+                <input class="form__input <?= $error_classname; ?>" type="password" name="password" id="password"
+                value="" placeholder="Введите пароль">
                 <p class="form__message"><?= $error_text; ?></p>
             </div>
             <div class="form__row">
                 <?php $error_classname = !empty($errors['name']) ? "form__input--error" : ""; ?>
                 <?php $error_text = !empty($errors['name']) ? $errors['name'] : ""; ?>
                 <label class="form__label" for="name">Имя <sup>*</sup></label>
-                <input class="form__input <?= $error_classname; ?>" type="text" name="name" id="name" value="<?= getPostVal('name'); ?>" placeholder="Введите имя">
+                <input class="form__input <?= $error_classname; ?>" type="text" name="name" id="name"
+                value="<?= getPostVal('name'); ?>" placeholder="Введите имя">
                 <p class="form__message"><?= $error_text; ?></p>
             </div>
             <div class="form__row form__row--controls">

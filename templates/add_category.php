@@ -8,7 +8,9 @@
             <?php $error_classname = !empty($errors['name']) ? "form__input--error" : "";
             $error_text = !empty($errors['name']) ? $errors['name'] : "";?>
             <label class="form__label" for="project_name">Название <sup>*</sup></label>
-            <input class="form__input <?= $error_classname; ?>" type="text" name="name" id="project_name" value="<?= getPostVal('name'); ?>" placeholder="Введите название категории">
+            <input class="form__input
+            <?= $error_classname; ?>" type="text" name="name" id="project_name"
+            value="<?= getPostVal('name'); ?>" placeholder="Введите название категории">
             <p class="form__message"><?= $error_text; ?></p>
         </div>
         <div class="form__row form__row--controls">

@@ -8,7 +8,9 @@
             <?php $error_classname = !empty($errors['name']) ? "form__input--error" : "";
             $error_text = !empty($errors['name']) ? $errors['name'] : "";?>
             <label class="form__label" for="name">Название <sup>*</sup></label>
-            <input class="form__input <?= $error_classname; ?>" type="text" name="name" id="name" value="<?= getPostVal('name'); ?>" placeholder="Введите название">
+            <input class="form__input
+            <?= $error_classname; ?>" type="text" name="name" id="name"
+            value="<?= getPostVal('name'); ?>" placeholder="Введите название">
             <p class="form__message"><?= $error_text; ?></p>
         </div>
         <div class="form__row">
@@ -27,13 +29,17 @@
             <p class="form__message"><?= $error_text; ?></p>
         </div>
         <div class="form__row">
-            <?php $error_classname = !empty($errors['date']) ? "form__input--error" : ""; ?><?php $error_text = !empty($errors['date']) ? $errors['date'] : ""; ?>
+            <?php $error_classname = !empty($errors['date']) ? "form__input--error" : ""; ?>
+            <?php $error_text = !empty($errors['date']) ? $errors['date'] : ""; ?>
             <label class="form__label" for="date">Дата выполнения</label>
-            <input class="form__input form__input--date <?= $error_classname; ?>" type="text" name="date" id="date" value="<?= getPostVal('date'); ?>" placeholder="Введите дату в формате ГГГГ-ММ-ДД">
+            <input class="form__input form__input--date
+            <?= $error_classname; ?>" type="text" name="date" id="date"
+            value="<?= getPostVal('date'); ?>" placeholder="Введите дату в формате ГГГГ-ММ-ДД">
             <p class="form__message"><?= $error_text; ?></p>
         </div>
         <div class="form__row">
-            <?php $error_classname = !empty($errors['file']) ? "form__input--error" : ""; ?><?php $error_text = !empty($errors['file']) ? $errors['file'] : ""; ?>
+            <?php $error_classname = !empty($errors['file']) ? "form__input--error" : ""; ?>
+            <?php $error_text = !empty($errors['file']) ? $errors['file'] : ""; ?>
             <label class="form__label" for="file">Файл</label>
             <div class="form__input-file">
                 <input class="visually-hidden" type="file" name="file" id="file" value="<?= getPostVal('file'); ?>">

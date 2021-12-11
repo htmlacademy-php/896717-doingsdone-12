@@ -10,14 +10,16 @@
             $error_text = !empty($errors['email']) ? $errors['email'] : ""; ?>
             <div class="form__row">
                 <label class="form__label" for="email">E-mail <sup>*</sup></label>
-                <input class="form__input <?= $error_classname; ?>" type="text" name="email" id="email" value="<?=getPostVal('email');?>" placeholder="Введите e-mail">
+                <input class="form__input <?= $error_classname; ?>" type="text" name="email" id="email"
+                value="<?=getPostVal('email');?>" placeholder="Введите e-mail">
                 <p class="form__message"><?= $error_text; ?></p>
             </div>
             <?php $error_classname = !empty($errors['pass']) ? "form__input--error" : "";
             $error_text = !empty($errors['pass']) ? $errors['pass'] : ""; ?>
             <div class="form__row">
                 <label class="form__label" for="pass">Пароль <sup>*</sup></label>
-                <input class="form__input <?= $error_classname; ?>" type="password" name="pass" id="pass" value="" placeholder="Введите пароль">
+                <input class="form__input <?= $error_classname; ?>"
+                type="password" name="pass" id="pass" value="" placeholder="Введите пароль">
                 <p class="form__message"><?= $error_text; ?></p>
             </div>
             <div class="form__row form__row--controls">
