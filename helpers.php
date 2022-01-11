@@ -15,7 +15,7 @@ const HOURS_IN_DAY = 24;
  *
  * @return bool true при совпадении с форматом 'ГГГГ-ММ-ДД', иначе false
  */
-function is_date_valid(string $date) : bool
+function is_date_valid(string $date): bool
 {
     $format_to_check = 'Y-m-d';
     $dateTimeObj = date_create_from_format($format_to_check, $date);
@@ -99,7 +99,7 @@ function db_get_prepare_stmt($link, $sql, $data = [])
  */
 function get_noun_plural_form(int $number, string $one, string $two, string $many): string
 {
-    $number = (int) $number;
+    $number = (int)$number;
     $mod10 = $number % 10;
     $mod100 = $number % 100;
 
@@ -173,7 +173,7 @@ function task_сount($tasks, $category_id)
  *
  * @param string принимает дату задачи
  *
- * @return integer разницу между двумя значениями в часах
+ * @return bool разницу между двумя значениями в часах
  */
 function is_deadline($task_date)
 {
@@ -205,11 +205,11 @@ function check_user_auth($data = [])
  *
  * @param string $task_date принимает дату задачи
  *
- * @return integer разницу между двумя значениями в часах
+ * @return false|float разницу между двумя значениями в часах
  */
 function dates_diff($task_date)
 {
     $current_date = time();
     $task_date_to_timestamp = strtotime($task_date);
-    return floor(($task_date_to_timestamp - $current_date)/86400);
+    return floor(($task_date_to_timestamp - $current_date) / 86400);
 }

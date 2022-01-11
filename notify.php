@@ -26,10 +26,10 @@ if (isset($user)) {
         $letter->setSubject("Уведомление от сервиса «Дела в порядке»");
         $letter->setFrom('keks@phpdemo.ru');
         $letter->setTo($user['email']);
-        $message = 'Уважаемый, ' . $user['user_name'] .'\n';
+        $message = 'Уважаемый, ' . $user['user_name'] . '\n';
         foreach ($task['task'] as $task) {
             $message .= 'У вас запланирована задача: ';
-            $message .=  $task['title'];
+            $message .= $task['title'];
             $message .= ' на ' . date('d.m.Y', strtotime($task['deadline']));
             $message .= '\n';
         }

@@ -15,12 +15,12 @@ function db_error(string $message)
 }
 
 /**
-* Функция для получения значений из POST-запроса.
-*
-* @param string $name название поля формы
-*
-* @return string значение поля формы
-*/
+ * Функция для получения значений из POST-запроса.
+ *
+ * @param string $name название поля формы
+ *
+ * @return string значение поля формы
+ */
 function getPostVal(string $name)
 {
     if (isset($_POST[$name])) {
@@ -29,13 +29,13 @@ function getPostVal(string $name)
 }
 
 /**
-* Функция проверяет, есть ли в базе email введенный в форму авторизации
-*
-* @param mysqli $con подключение к базе
-* @param string $email электронный адрес пользователя
-*
-* @return true или false
-*/
+ * Функция проверяет, есть ли в базе email введенный в форму авторизации
+ *
+ * @param mysqli $con подключение к базе
+ * @param string $email электронный адрес пользователя
+ *
+ * @return true или false
+ */
 function check_email(mysqli $con, string $email)
 {
     $sql = 'SELECT id FROM users WHERE email = ?';
@@ -48,13 +48,13 @@ function check_email(mysqli $con, string $email)
 }
 
 /**
-* Функция проверяет, есть ли в базе id категории введенный в форму добавления
-*
-* @param mysqli $con подключение к базе
-* @param string $category электронный адрес пользователя
-*
-* @return bool true или false
-*/
+ * Функция проверяет, есть ли в базе id категории введенный в форму добавления
+ *
+ * @param mysqli $con подключение к базе
+ * @param string $category электронный адрес пользователя
+ *
+ * @return bool true или false
+ */
 function check_category(mysqli $con, string $category)
 {
     $sql = 'SELECT id FROM category WHERE id = ?';
@@ -76,7 +76,8 @@ function check_category(mysqli $con, string $category)
  */
 function insert_task_to_db(mysqli $con, array $data = [])
 {
-    $sql = 'INSERT INTO task (name, date, cat_id, file, user_id, dt_add) VALUES (?, ?, ?, ?, ?, NOW())';
+    $sql = 'INSERT INTO task (name, date, cat_id, file, user_id, dt_add)
+    VALUES (?, ?, ?, ?, ?, NOW())';
     $stmt = db_get_prepare_stmt($con, $sql, $data);
     $res = mysqli_stmt_execute($stmt);
     return $res ?? db_error('Не удалось добавить задачу');
@@ -128,7 +129,8 @@ function get_categories(mysqli $con, int $user_id)
     $stmt = db_get_prepare_stmt($con, $sql, [$user_id]);
     mysqli_stmt_execute($stmt);
     $res = mysqli_stmt_get_result($stmt);
-    return $res ? mysqli_fetch_all($res, MYSQLI_ASSOC) : db_error('Не удалось получить массив категорий');
+    return $res ? mysqli_fetch_all($res, MYSQLI_ASSOC) :
+    db_error('Не удалось получить массив категорий');
 }
 
 /**
@@ -142,21 +144,23 @@ function get_categories(mysqli $con, int $user_id)
  */
 function get_tasks_by_category(mysqli $con, int $user_id, int $cat_id)
 {
-    $sql = 'SELECT id, name, date, cat_id, file, done FROM task WHERE user_id = ? AND cat_id = ? AND done = 0';
+    $sql = 'SELECT id, name, date, cat_id, file, done FROM task
+    WHERE user_id = ? AND cat_id = ? AND done = 0';
     $stmt = db_get_prepare_stmt($con, $sql, [$user_id, $cat_id]);
     mysqli_stmt_execute($stmt);
     $res = mysqli_stmt_get_result($stmt);
-    return $res ? mysqli_fetch_all($res, MYSQLI_ASSOC) : db_error('Не удалось получить массив задач');
+    return $res ? mysqli_fetch_all($res, MYSQLI_ASSOC) :
+    db_error('Не удалось получить массив задач');
 }
 
 /**
-* Функция получает данные из базы и формирует массив данных пользователя
-*
-* @param mysqli $con подключение к базе
-* @param string $email электронный адрес пользователя
-*
-* @return array массив с данными пользователя или null
-*/
+ * Функция получает данные из базы и формирует массив данных пользователя
+ *
+ * @param mysqli $con подключение к базе
+ * @param string $email электронный адрес пользователя
+ *
+ * @return array массив с данными пользователя или null
+ */
 function get_user(mysqli $con, string $email)
 {
     $sql = 'SELECT id, name, email, pass FROM users WHERE email = ?';
@@ -176,11 +180,13 @@ function get_user(mysqli $con, string $email)
  */
 function get_tasks_by_search(mysqli $con, array $data = [])
 {
-    $sql = 'SELECT id, name, date, cat_id, file, done FROM task WHERE MATCH(name) AGAINST (?)';
+    $sql = 'SELECT id, name, date, cat_id, file, done
+    FROM task WHERE MATCH(name) AGAINST (?)';
     $stmt = db_get_prepare_stmt($con, $sql, $data);
     mysqli_stmt_execute($stmt);
     $res = mysqli_stmt_get_result($stmt);
-    return $res ? mysqli_fetch_all($res, MYSQLI_ASSOC) : db_error('Не удалось получить массив задач');
+    return $res ? mysqli_fetch_all($res, MYSQLI_ASSOC) :
+    db_error('Не удалось получить массив задач');
 }
 
 /**
@@ -257,11 +263,13 @@ function task_checkbox(mysqli $con, int $task_id)
  */
 function get_users_tasks_today(mysqli $con)
 {
-    $sql = "SELECT users.id, users.name as user_name, users.email, task.name as task_name, task.date
+    $sql = "SELECT users.id, users.name as
+    user_name, users.email, task.name as task_name, task.date
     FROM users JOIN task ON task.user_id = users.id
     WHERE task.done = 0 AND task.date = CURRENT_DATE()";
     $stmt = db_get_prepare_stmt($con, $sql);
     mysqli_stmt_execute($stmt);
     $res = mysqli_stmt_get_result($stmt);
-    return $res ? mysqli_fetch_all($res, MYSQLI_ASSOC) : db_error('Не удалось получить массив задач');
+    return $res ? mysqli_fetch_all($res, MYSQLI_ASSOC) :
+    db_error('Не удалось получить массив задач');
 }

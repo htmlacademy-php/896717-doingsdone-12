@@ -21,7 +21,7 @@ if ($user_id) {
 $cat_id = $_GET['cat_id'] ?? false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $required_fields = ['name','category'];
+    $required_fields = ['name', 'category'];
     $errors = [];
     foreach ($required_fields as $field) {
         if (empty($_POST[$field])) {
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $filename = $_FILES['file']['name'];
             $filename = uniqid() . $filename;
             move_uploaded_file($tmp_name, 'uploads/' . $filename);
-            $task_file = 'uploads/' . $filename;
+            $task_file = $filename;
         }
         insert_task_to_db(
             $con,

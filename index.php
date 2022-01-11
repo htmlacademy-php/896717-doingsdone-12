@@ -21,8 +21,7 @@ if (!empty($user)) {
     $tasks_by_category = get_tasks_by_category($con, $user_id, $cat_id) ?? false;
     $categories = get_categories($con, $user_id) ?? false;
 
-    $array_page_content =
-        [
+    $array_page_content = [
             'categories' => $categories,
             'all_tasks' => $all_tasks,
             'tasks' => $tasks,

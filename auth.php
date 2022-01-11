@@ -1,7 +1,7 @@
 <?php
 /**
-* @var mysqli $con подключение к базе
-*/
+ * @var mysqli $con подключение к базе
+ */
 require_once 'init.php';
 require_once 'helpers.php';
 require_once 'models.php';
@@ -15,7 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = [];
     $email = trim($_POST['email']);
     $pass = $_POST['pass'];
-    $user = get_user($con, $email) ?? $errors['email'] = 'Такой пользователь не найден';
+    $user = get_user($con, $email) ??
+    $errors['email'] = 'Такой пользователь не найден';
     $hash = $user['pass'] ?? null;
     foreach ($required as $field) {
         if (empty($_POST[$field])) {
